@@ -8,9 +8,9 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Manage Blogs | Saminofolio",
-};
+// export const metadata: Metadata = {
+//   title: "Manage Blogs | Saminofolio",
+// };
 
 export default function ManageBlogs() {
   const router = useRouter();
@@ -139,7 +139,7 @@ export default function ManageBlogs() {
                     </Link>
                     <button
                       onClick={() => handleDelete(blog._id)}
-                      className="text-red-600 hover:text-red-900"
+                      className="text-red-600 hover:text-red-900 cursor-pointer"
                     >
                       Delete
                     </button>

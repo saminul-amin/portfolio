@@ -12,9 +12,9 @@ interface LoginFormData {
   password: string;
 }
 
-export const metadata: Metadata = {
-  title: "Login | Saminofolio",
-};
+// export const metadata: Metadata = {
+//   title: "Login | Saminofolio",
+// };
 
 export default function Login() {
   const router = useRouter();
@@ -109,15 +109,15 @@ export default function Login() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Signing in..." : "Sign In"}
           </button>
         </form>
 
-        <p className="text-center mt-6 text-gray-600">
+        {/* <p className="text-center mt-6 text-gray-600">
           Default credentials: admin@portfolio.com / admin123
-        </p>
+        </p> */}
       </div>
     </div>
   );

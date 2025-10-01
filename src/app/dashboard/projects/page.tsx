@@ -8,9 +8,9 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Manage Projects | Saminofolio",
-};
+// export const metadata: Metadata = {
+//   title: "Manage Projects | Saminofolio",
+// };
 
 export default function ManageProjects() {
   const router = useRouter();

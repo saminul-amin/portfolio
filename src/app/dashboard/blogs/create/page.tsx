@@ -16,9 +16,9 @@ interface BlogFormData {
   published: boolean;
 }
 
-export const metadata: Metadata = {
-  title: "Create Blog | Saminofolio",
-};
+// export const metadata: Metadata = {
+//   title: "Create Blog | Saminofolio",
+// };
 
 export default function CreateBlog() {
   const router = useRouter();
@@ -205,14 +205,14 @@ export default function CreateBlog() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             {isSubmitting ? "Creating..." : "Create Blog"}
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
           >
             Cancel
           </button>
