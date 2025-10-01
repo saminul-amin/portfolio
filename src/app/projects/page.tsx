@@ -1,46 +1,44 @@
-import { Blog } from "@/types";
-import BlogCard from "@/components/BlogCard";
+import { Project } from '@/types';
+import ProjectCard from '@/components/ProjectCard';
 
 // ISR - Incremental Static Regeneration
-async function getBlogs(): Promise<Blog[]> {
+async function getProjects(): Promise<Project[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`, {
       next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch blogs");
+      throw new Error('Failed to fetch projects');
     }
 
     const data = await res.json();
     return data.data || [];
   } catch (error) {
-    console.error("Error fetching blogs:", error);
+    console.error('Error fetching projects:', error);
     return [];
   }
 }
 
-export default async function Blogs() {
-  const blogs = await getBlogs();
+export default async function Projects() {
+  const projects = await getProjects();
 
   return (
     <div className="min-h-screen py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h1 className="text-5xl font-bold mb-4 text-center">Blog Posts</h1>
+        <h1 className="text-5xl font-bold mb-4 text-center">My Projects</h1>
         <p className="text-xl text-gray-600 mb-12 text-center max-w-2xl mx-auto">
-          Thoughts, tutorials, and insights about web development.
+          Here are some of my recent projects showcasing my skills and experience.
         </p>
 
-        {blogs.length === 0 ? (
+        {projects.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-xl text-gray-600">
-              No blogs found. Check back later!
-            </p>
+            <p className="text-xl text-gray-600">No projects found. Check back later!</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {blogs.map((blog) => (
-              <BlogCard key={blog._id} blog={blog} />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project) => (
+              <ProjectCard key={project._id} project={project} />
             ))}
           </div>
         )}

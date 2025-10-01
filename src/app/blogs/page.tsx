@@ -23,6 +23,8 @@ async function getBlogs(): Promise<Blog[]> {
 export default async function Blogs() {
   const blogs = await getBlogs();
 
+  console.log(`${process.env.NEXT_PUBLIC_API_URL}/blogs`)
+
   return (
     <div className="min-h-screen py-20 bg-gray-50">
       <div className="container mx-auto px-4">
