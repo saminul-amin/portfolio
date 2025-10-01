@@ -1,11 +1,16 @@
 import { Blog } from "@/types";
 import BlogCard from "@/components/BlogCard";
+import { Metadata } from "next";
 
-// ISR - Incremental Static Regeneration
+export const metadata: Metadata = {
+  title: "Blogs | Saminofolio",
+};
+
+// ISR
 async function getBlogs(): Promise<Blog[]> {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs`, {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {

@@ -26,7 +26,7 @@ export default function RootLayout({
         <Toaster position="top-right" />
         <footer className="bg-gray-900 text-white py-8 mt-20">
           <div className="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Your Portfolio. All rights reserved.</p>
+            <p>&copy; 2025 Saminofolio. All rights reserved.</p>
           </div>
         </footer>
       </body>

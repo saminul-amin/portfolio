@@ -1,59 +1,53 @@
 "use client";
 
-import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { useForm, Controller } from "react-hook-form";
 import api from "@/lib/api";
 import toast from "react-hot-toast";
 import RichTextEditor from "@/components/RichTextEditor";
+import { Metadata } from "next";
+
+interface BlogFormData {
+  title: string;
+  content: string;
+  excerpt: string;
+  coverImage: string;
+  tags: string;
+  published: boolean;
+}
+
+export const metadata: Metadata = {
+  title: "Create Blog | Saminofolio",
+};
 
 export default function CreateBlog() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    title: "",
-    content: "",
-    excerpt: "",
-    coverImage: "",
-    tags: "",
-    published: true,
+  const {
+    register,
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm<BlogFormData>({
+    defaultValues: {
+      published: true,
+    },
   });
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const titleLength = watch("title")?.length || 0;
+  const excerptLength = watch("excerpt")?.length || 0;
 
-    // Validation
-    if (!formData.title.trim()) {
-      toast.error("Title is required");
-      return;
-    }
-
-    if (!formData.content.trim()) {
-      toast.error("Content is required");
-      return;
-    }
-
-    if (formData.title.length > 200) {
-      toast.error("Title must be less than 200 characters");
-      return;
-    }
-
-    if (formData.excerpt && formData.excerpt.length > 300) {
-      toast.error("Excerpt must be less than 300 characters");
-      return;
-    }
-
-    setLoading(true);
-
+  const onSubmit = async (data: BlogFormData) => {
     try {
-      const tagsArray = formData.tags
-        ? formData.tags
+      const tagsArray = data.tags
+        ? data.tags
             .split(",")
             .map((tag) => tag.trim())
             .filter(Boolean)
         : [];
 
       const response = await api.post("/blogs", {
-        ...formData,
+        ...data,
         tags: tagsArray,
       });
 
@@ -64,8 +58,6 @@ export default function CreateBlog() {
     } catch (error: any) {
       const message = error.response?.data?.message || "Failed to create blog";
       toast.error(message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -74,7 +66,7 @@ export default function CreateBlog() {
       <h1 className="text-4xl font-bold mb-8">Create New Blog</h1>
 
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="bg-white p-8 rounded-lg shadow-md"
       >
         <div className="mb-6">
@@ -87,17 +79,21 @@ export default function CreateBlog() {
           <input
             type="text"
             id="title"
-            value={formData.title}
-            onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
-            }
+            {...register("title", {
+              required: "Title is required",
+              maxLength: {
+                value: 200,
+                message: "Title must be less than 200 characters",
+              },
+            })}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
             placeholder="Enter blog title"
-            maxLength={200}
-            required
           />
+          {errors.title && (
+            <p className="text-red-600 text-sm mt-1">{errors.title.message}</p>
+          )}
           <p className="text-sm text-gray-500 mt-1">
-            {formData.title.length}/200 characters
+            {titleLength}/200 characters
           </p>
         </div>
 
@@ -110,17 +106,23 @@ export default function CreateBlog() {
           </label>
           <textarea
             id="excerpt"
-            value={formData.excerpt}
-            onChange={(e) =>
-              setFormData({ ...formData, excerpt: e.target.value })
-            }
+            {...register("excerpt", {
+              maxLength: {
+                value: 300,
+                message: "Excerpt must be less than 300 characters",
+              },
+            })}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
             placeholder="Brief summary of the blog (optional)"
             rows={3}
-            maxLength={300}
           />
+          {errors.excerpt && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.excerpt.message}
+            </p>
+          )}
           <p className="text-sm text-gray-500 mt-1">
-            {formData.excerpt.length}/300 characters
+            {excerptLength}/300 characters
           </p>
         </div>
 
@@ -134,13 +136,20 @@ export default function CreateBlog() {
           <input
             type="url"
             id="coverImage"
-            value={formData.coverImage}
-            onChange={(e) =>
-              setFormData({ ...formData, coverImage: e.target.value })
-            }
+            {...register("coverImage", {
+              pattern: {
+                value: /^https?:\/\/.+/,
+                message: "Please enter a valid URL",
+              },
+            })}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
             placeholder="https://example.com/image.jpg"
           />
+          {errors.coverImage && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.coverImage.message}
+            </p>
+          )}
         </div>
 
         <div className="mb-6">
@@ -153,8 +162,7 @@ export default function CreateBlog() {
           <input
             type="text"
             id="tags"
-            value={formData.tags}
-            onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+            {...register("tags")}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
             placeholder="javascript, react, web development (comma separated)"
           />
@@ -164,20 +172,29 @@ export default function CreateBlog() {
           <label className="block text-gray-700 font-semibold mb-2">
             Content *
           </label>
-          <RichTextEditor
-            value={formData.content}
-            onChange={(value) => setFormData({ ...formData, content: value })}
+          <Controller
+            name="content"
+            control={control}
+            rules={{ required: "Content is required" }}
+            render={({ field }) => (
+              <RichTextEditor
+                value={field.value || ""}
+                onChange={field.onChange}
+              />
+            )}
           />
+          {errors.content && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.content.message}
+            </p>
+          )}
         </div>
 
         <div className="mb-6">
           <label className="flex items-center">
             <input
               type="checkbox"
-              checked={formData.published}
-              onChange={(e) =>
-                setFormData({ ...formData, published: e.target.checked })
-              }
+              {...register("published")}
               className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
             />
             <span className="ml-2 text-gray-700">Publish immediately</span>
@@ -187,10 +204,10 @@ export default function CreateBlog() {
         <div className="flex gap-4">
           <button
             type="submit"
-            disabled={loading}
+            disabled={isSubmitting}
             className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? "Creating..." : "Create Blog"}
+            {isSubmitting ? "Creating..." : "Create Blog"}
           </button>
           <button
             type="button"

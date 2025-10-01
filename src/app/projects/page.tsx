@@ -1,11 +1,16 @@
 import { Project } from '@/types';
 import ProjectCard from '@/components/ProjectCard';
+import { Metadata } from 'next';
 
-// ISR - Incremental Static Regeneration
+export const metadata: Metadata = {
+  title: "Projects | Saminofolio",
+};
+
+// ISR
 async function getProjects(): Promise<Project[]> {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`, {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {

@@ -1,40 +1,32 @@
 "use client";
 
-import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import api from "@/lib/api";
 import { setAuth } from "@/lib/auth";
 import toast from "react-hot-toast";
+import { Metadata } from "next";
+
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+export const metadata: Metadata = {
+  title: "Login | Saminofolio",
+};
 
 export default function Login() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormData>();
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    // Validation
-    if (!email || !password) {
-      toast.error("Please fill in all fields");
-      return;
-    }
-
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      toast.error("Please enter a valid email");
-      return;
-    }
-
-    if (password.length < 6) {
-      toast.error("Password must be at least 6 characters");
-      return;
-    }
-
-    setLoading(true);
-
+  const onSubmit = async (data: LoginFormData) => {
     try {
-      const response = await api.post("/auth/login", { email, password });
+      const response = await api.post("/auth/login", data);
 
       if (response.data.success) {
         setAuth(response.data.data);
@@ -45,8 +37,6 @@ export default function Login() {
       const message =
         error.response?.data?.message || "Login failed. Please try again.";
       toast.error(message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -59,7 +49,7 @@ export default function Login() {
         </div>
 
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="bg-white p-8 rounded-lg shadow-md"
         >
           <div className="mb-6">
@@ -72,12 +62,21 @@ export default function Login() {
             <input
               type="email"
               id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Please enter a valid email address",
+                },
+              })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
               placeholder="your.email@example.com"
-              required
             />
+            {errors.email && (
+              <p className="text-red-600 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
           <div className="mb-6">
@@ -90,20 +89,29 @@ export default function Login() {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
               placeholder="••••••••"
-              required
             />
+            {errors.password && (
+              <p className="text-red-600 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
           </div>
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={isSubmitting}
             className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? "Signing in..." : "Sign In"}
+            {isSubmitting ? "Signing in..." : "Sign In"}
           </button>
         </form>
 

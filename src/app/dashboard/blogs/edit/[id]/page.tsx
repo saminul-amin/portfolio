@@ -5,6 +5,11 @@ import { useRouter, useParams } from "next/navigation";
 import api from "@/lib/api";
 import toast from "react-hot-toast";
 import RichTextEditor from "@/components/RichTextEditor";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Update Blog | Saminofolio",
+};
 
 export default function EditBlog() {
   const router = useRouter();

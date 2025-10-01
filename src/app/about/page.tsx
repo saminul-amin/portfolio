@@ -1,4 +1,10 @@
-// SSG - Static Site Generation
+import { Metadata } from "next";
+
+// SSG
+export const metadata: Metadata = {
+  title: "About Me | Saminofolio"
+}
+
 export default function About() {
   return (
     <div className="min-h-screen py-20">
@@ -7,7 +13,7 @@ export default function About() {
 
         {/* Bio Section */}
         <section className="mb-12 bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-3xl font-bold mb-4">Hello! I'm [Your Name]</h2>
+          <h2 className="text-3xl font-bold mb-4">I'm Md. Saminul Amin</h2>
           <p className="text-lg text-gray-700 mb-4">
             I'm a passionate Full Stack Developer with expertise in building
             modern web applications using the latest technologies. I love
@@ -26,66 +32,29 @@ export default function About() {
           <div className="space-y-4">
             <div>
               <h3 className="font-semibold text-gray-700">Email:</h3>
-              <p className="text-lg">your.email@example.com</p>
+              <p className="text-lg">saminul.amin@gmail.com</p>
             </div>
             <div>
               <h3 className="font-semibold text-gray-700">Location:</h3>
-              <p className="text-lg">Your City, Country</p>
+              <p className="text-lg">Dhaka, Bangladesh</p>
             </div>
             <div>
               <h3 className="font-semibold text-gray-700">GitHub:</h3>
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/saminul-amin"
                 className="text-primary hover:underline text-lg"
               >
-                github.com/yourusername
+                github.com/saminul-amin
               </a>
             </div>
             <div>
               <h3 className="font-semibold text-gray-700">LinkedIn:</h3>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://www.linkedin.com/in/md-saminul-amin-91605730a/"
                 className="text-primary hover:underline text-lg"
               >
-                linkedin.com/in/yourusername
+                https://www.linkedin.com/in/md-saminul-amin-91605730a/
               </a>
-            </div>
-          </div>
-        </section>
-
-        {/* Work Experience */}
-        <section className="mb-12 bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-3xl font-bold mb-6">Work Experience</h2>
-          <div className="space-y-6">
-            <div className="border-l-4 border-primary pl-4">
-              <h3 className="text-xl font-semibold">Full Stack Developer</h3>
-              <p className="text-gray-600">Company Name | 2022 - Present</p>
-              <ul className="mt-2 space-y-2 text-gray-700">
-                <li>
-                  • Developed and maintained web applications using Next.js and
-                  React
-                </li>
-                <li>• Built RESTful APIs with Node.js and Express</li>
-                <li>
-                  • Collaborated with cross-functional teams to deliver projects
-                </li>
-              </ul>
-            </div>
-            <div className="border-l-4 border-primary pl-4">
-              <h3 className="text-xl font-semibold">Junior Developer</h3>
-              <p className="text-gray-600">Another Company | 2020 - 2022</p>
-              <ul className="mt-2 space-y-2 text-gray-700">
-                <li>
-                  • Assisted in frontend development using React and TypeScript
-                </li>
-                <li>
-                  • Participated in code reviews and agile development processes
-                </li>
-                <li>
-                  • Learned and implemented best practices in software
-                  development
-                </li>
-              </ul>
             </div>
           </div>
         </section>

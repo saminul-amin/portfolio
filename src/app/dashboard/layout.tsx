@@ -23,6 +23,8 @@ export default function DashboardLayout({
     { href: "/dashboard", label: "Dashboard" },
     { href: "/dashboard/blogs", label: "Manage Blogs" },
     { href: "/dashboard/blogs/create", label: "Create Blog" },
+    { href: "/dashboard/projects", label: "Manage Projects" },
+    { href: "/dashboard/projects/create", label: "Create Project" },
   ];
 
   return (

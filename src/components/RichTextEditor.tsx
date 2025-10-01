@@ -33,7 +33,7 @@ const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
     "underline",
     "strike",
     "list",
-    "bullet",
+    // "bullet",
     "color",
     "background",
     "link",

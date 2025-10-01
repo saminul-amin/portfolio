@@ -1,11 +1,16 @@
 import { Blog } from "@/types";
+import { Metadata } from "next";
 import Link from "next/link";
 
-// ISR with dynamic params
+export const metadata: Metadata = {
+  title: "Blog Details | Saminofolio",
+};
+
+// ISR
 async function getBlog(id: string): Promise<Blog | null> {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/${id}`, {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {
