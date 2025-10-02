@@ -1,11 +1,11 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import api from "@/lib/api";
 import toast from "react-hot-toast";
 import RichTextEditor from "@/components/RichTextEditor";
-import { Metadata } from "next";
 
 interface BlogFormData {
   title: string;
@@ -15,10 +15,6 @@ interface BlogFormData {
   tags: string;
   published: boolean;
 }
-
-// export const metadata: Metadata = {
-//   title: "Create Blog | Saminofolio",
-// };
 
 export default function CreateBlog() {
   const router = useRouter();

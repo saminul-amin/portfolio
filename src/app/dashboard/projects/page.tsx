@@ -1,19 +1,13 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import { Project } from "@/types";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import { Metadata } from "next";
-
-// export const metadata: Metadata = {
-//   title: "Manage Projects | Saminofolio",
-// };
 
 export default function ManageProjects() {
-  const router = useRouter();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -111,7 +105,7 @@ export default function ManageProjects() {
                   </Link>
                   <button
                     onClick={() => handleDelete(project._id)}
-                    className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm"
+                    className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm cursor-pointer"
                   >
                     Delete
                   </button>

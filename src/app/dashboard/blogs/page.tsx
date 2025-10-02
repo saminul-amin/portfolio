@@ -1,19 +1,13 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import { Blog } from "@/types";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import { Metadata } from "next";
-
-// export const metadata: Metadata = {
-//   title: "Manage Blogs | Saminofolio",
-// };
 
 export default function ManageBlogs() {
-  const router = useRouter();
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
 

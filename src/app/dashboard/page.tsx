@@ -30,6 +30,7 @@ export default function Dashboard() {
       });
     } catch (error) {
       toast.error("Failed to fetch statistics");
+      console.log("error", error);
     } finally {
       setLoading(false);
     }
@@ -58,7 +59,7 @@ export default function Dashboard() {
           <h3 className="text-gray-600 text-sm font-semibold mb-2">
             Total Projects
           </h3>
-          <p className="text-4xl font-bold text-secondary">{stats.projects}</p>
+          <p className="text-4xl font-bold text-primary">{stats.projects}</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-gray-600 text-sm font-semibold mb-2">Role</h3>
@@ -87,6 +88,23 @@ export default function Dashboard() {
             <p className="font-semibold text-lg">Manage Blogs</p>
             <p className="text-gray-600 text-sm">
               Edit or delete existing blogs
+            </p>
+          </a>
+
+          <a
+            href="/dashboard/projects/create"
+            className="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-center"
+          >
+            <p className="font-semibold text-lg">Create New Project</p>
+            <p className="text-gray-600 text-sm">Add Project</p>
+          </a>
+          <a
+            href="/dashboard/projects"
+            className="p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary hover:bg-primary/5 transition-all text-center"
+          >
+            <p className="font-semibold text-lg">Manage Projects</p>
+            <p className="text-gray-600 text-sm">
+              Edit or delete existing projects
             </p>
           </a>
         </div>

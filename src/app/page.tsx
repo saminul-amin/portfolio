@@ -67,7 +67,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Work Together?</h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            I'm always open to discussing new projects and opportunities.
+            I&apos;m always open to discussing new projects and opportunities.
           </p>
           <Link
             href="/about"

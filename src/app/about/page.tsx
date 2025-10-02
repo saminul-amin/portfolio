@@ -13,9 +13,9 @@ export default function About() {
 
         {/* Bio Section */}
         <section className="mb-12 bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-3xl font-bold mb-4">I'm Md. Saminul Amin</h2>
+          <h2 className="text-3xl font-bold mb-4">I&apos;m Md. Saminul Amin</h2>
           <p className="text-lg text-gray-700 mb-4">
-            I'm a passionate Full Stack Developer with expertise in building
+            I&apos;m a passionate Full Stack Developer with expertise in building
             modern web applications using the latest technologies. I love
             solving complex problems and creating seamless user experiences.
           </p>

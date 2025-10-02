@@ -1,20 +1,16 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import api from "@/lib/api";
 import { setAuth } from "@/lib/auth";
 import toast from "react-hot-toast";
-import { Metadata } from "next";
 
 interface LoginFormData {
   email: string;
   password: string;
 }
-
-// export const metadata: Metadata = {
-//   title: "Login | Saminofolio",
-// };
 
 export default function Login() {
   const router = useRouter();
