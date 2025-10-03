@@ -2,8 +2,8 @@ import { Metadata } from "next";
 
 // SSG
 export const metadata: Metadata = {
-  title: "About Me | Saminofolio"
-}
+  title: "About Me | Saminofolio",
+};
 
 export default function About() {
   return (
@@ -15,14 +15,24 @@ export default function About() {
         <section className="mb-12 bg-white p-8 rounded-lg shadow-md">
           <h2 className="text-3xl font-bold mb-4">I&apos;m Md. Saminul Amin</h2>
           <p className="text-lg text-gray-700 mb-4">
-            I&apos;m a passionate Full Stack Developer with expertise in building
-            modern web applications using the latest technologies. I love
-            solving complex problems and creating seamless user experiences.
+            I&apos;m a Computer Science & Engineering student and a passionate
+            Full Stack Developer who loves building real-world projects that
+            solve problems and enhance productivity. I enjoy exploring new
+            technologies, architecting scalable systems, and creating seamless
+            user experiences.
+          </p>
+          <p className="text-lg text-gray-700 mb-4">
+            Over the past year, I have worked on diverse projects — from a{" "}
+            <strong>Quiz App with timers and leaderboards</strong>, a{" "}
+            <strong>Notes app with categories and tags</strong>, to a{" "}
+            <strong>Freelancing platform using FastAPI & PostgreSQL</strong>. I
+            also experiment with Flutter apps, Spring Boot backends, and
+            full-stack MERN projects to continuously expand my skill set.
           </p>
           <p className="text-lg text-gray-700">
-            With a strong foundation in both frontend and backend development, I
-            specialize in creating scalable, maintainable, and user-friendly
-            applications.
+            I&apos;m also diving into <strong>Machine Learning</strong> to
+            combine my development skills with AI. My ultimate goal is to
+            contribute to impactful projects that help people and communities.
           </p>
         </section>
 
@@ -43,6 +53,7 @@ export default function About() {
               <a
                 href="https://github.com/saminul-amin"
                 className="text-primary hover:underline text-lg"
+                target="_blank"
               >
                 github.com/saminul-amin
               </a>
@@ -52,8 +63,9 @@ export default function About() {
               <a
                 href="https://www.linkedin.com/in/md-saminul-amin-91605730a/"
                 className="text-primary hover:underline text-lg"
+                target="_blank"
               >
-                https://www.linkedin.com/in/md-saminul-amin-91605730a/
+                linkedin.com/in/md-saminul-amin
               </a>
             </div>
           </div>
@@ -68,8 +80,8 @@ export default function About() {
               <ul className="space-y-2 text-gray-700">
                 <li>• React & Next.js</li>
                 <li>• TypeScript</li>
-                <li>• Tailwind CSS</li>
-                <li>• HTML5 & CSS3</li>
+                <li>• ShadCN & TailwindCSS</li>
+                <li>• Redux and TanStack Query</li>
               </ul>
             </div>
             <div>
@@ -77,26 +89,26 @@ export default function About() {
               <ul className="space-y-2 text-gray-700">
                 <li>• Node.js & Express</li>
                 <li>• MongoDB & Mongoose</li>
-                <li>• PostgreSQL & Prisma</li>
-                <li>• RESTful APIs</li>
+                <li>• PostgreSQL & FastAPI</li>
+                <li>• FastAPI & Spring Boot</li>
               </ul>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-3">Tools</h3>
               <ul className="space-y-2 text-gray-700">
                 <li>• Git & GitHub</li>
-                <li>• Docker</li>
                 <li>• VS Code</li>
                 <li>• Postman</li>
+                <li>• Docker</li>
               </ul>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-3">Other</h3>
               <ul className="space-y-2 text-gray-700">
+                <li>• RESTful APIs</li>
                 <li>• JWT Authentication</li>
                 <li>• Responsive Design</li>
-                <li>• API Integration</li>
-                <li>• Agile/Scrum</li>
+                <li>• Team Collaboration</li>
               </ul>
             </div>
           </div>

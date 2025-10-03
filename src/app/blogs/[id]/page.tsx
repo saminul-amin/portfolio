@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Blog } from "@/types";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -5,6 +6,12 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Blog Details | Saminofolio",
 };
+
+// interface BlogDetailPageProps {
+//   params: {
+//     id: string;
+//   };
+// }
 
 // ISR
 async function getBlog(id: string): Promise<Blog | null> {
@@ -25,11 +32,7 @@ async function getBlog(id: string): Promise<Blog | null> {
   }
 }
 
-export default async function BlogDetail({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function BlogDetail({ params }: any) {
   const blog = await getBlog(params.id);
 
   if (!blog) {
